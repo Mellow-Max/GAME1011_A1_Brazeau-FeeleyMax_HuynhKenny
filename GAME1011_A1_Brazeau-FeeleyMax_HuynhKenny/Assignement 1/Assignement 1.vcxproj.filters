@@ -15,13 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Inheritance.h">
+    <ClInclude Include="Survey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="People.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assignment 1.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Survey.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
