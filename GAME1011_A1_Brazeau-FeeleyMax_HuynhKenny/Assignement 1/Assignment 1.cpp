@@ -6,7 +6,7 @@
 using namespace std;
 
 
-auto main() -> int
+int main()
 {
 	Survey survey;
 	Person** participant = nullptr;
@@ -28,5 +28,7 @@ auto main() -> int
 	else
 	{
 		cout << "Please enter a valid number between 1 and 500" << endl;
-	}	
+	}
+	
+	return 0;
 }

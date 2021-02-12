@@ -52,5 +52,4 @@ private:
 	string m_sPreferred;
 public:
 	void Process(Person** participant, int NumParticipants);
-	
 };

@@ -186,9 +186,9 @@ void Survey::Process(Person** participant, int NumParticipants)
 	cout << "*" << m_NumberOfGamingStudents << " Gaming Students" << endl;
 	cout << "	- Average age of Gaming Students: " << m_gTotalAge / m_NumberOfGamingStudents << endl;
 	cout << "	- Most preferred gaming device: " << m_gPreferred << endl;
-	cout << "	- Average hours spent consuming gaming entertainment: " << m_gTotalHours / m_NumberOfGamingStudents << endl;
+	cout << "	- Average hours spent consuming gaming entertainment a week: " << m_gTotalHours / m_NumberOfGamingStudents << endl;
 	cout << "*" << m_NumberOfNonGamingStudents << " Non Gaming Students" << endl;
 	cout << "	- Average age of Non Gaming Students: " << m_nTotalAge / m_NumberOfNonGamingStudents << endl;
 	cout << "	- Most preferred streaming service: " << m_sPreferred << endl;
-	cout << "	- Average hours spent consuming gaming entertainment: " << m_nTotalHours / m_NumberOfNonGamingStudents << endl;
+	cout << "	- Average hours spent consuming streaming entertainment a week: " << m_nTotalHours / m_NumberOfNonGamingStudents << endl;
 }

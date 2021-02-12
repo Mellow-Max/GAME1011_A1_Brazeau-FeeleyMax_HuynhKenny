@@ -46,14 +46,6 @@ private:
 	string m_nameOfProgram;
 	int m_semester{};
 public:
-	Student()
-	{
-		SetName("");
-		SetAge(0);
-		SetCollege("");
-		SetProgram("");
-		SetSemester(0);
-	}
 	Student(string name, int age, string college, string program, int semester) : Person(name, age)
 	{
 		SetCollege((college));
