@@ -12,10 +12,10 @@ int main()
 	int NUM_PEOPLES;
 
 	cout << "Welcome to the entertainment consumption habits of college students Survey" << endl;
-	//cout << "How many participants would you like to survey" << endl;
-	//cin >> NUM_PEOPLES;
+	cout << "How many participants would you like to survey" << endl;
+	cin >> NUM_PEOPLES;
 	
-	participants.SetNumParticipants(1);
+	participants.SetNumParticipants(NUM_PEOPLES);
 	participants.Randomize();
 }
 

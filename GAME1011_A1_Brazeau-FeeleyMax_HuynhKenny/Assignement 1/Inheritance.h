@@ -181,6 +181,8 @@ public:
 	}
 	void Randomize()
 	{
+
+		participants = new Person*[NUM_PARTICIPANTS];
 		srand(time(0));
 		for(int i = 0; i< NUM_PARTICIPANTS;i++)
 		{
@@ -188,20 +190,31 @@ public:
 			if (isGaming)
 			{
 				participants[i] = new GamingStudent(FirstName[rand() % 9] + " " + LastName[rand() % 9],
-					rand() % 36 + 16, cName[rand() % 4], pName[rand() % 4],
+					rand() % 21 + 16, cName[rand() % 4], pName[rand() % 4],
 					rand() % 8 + 1, gName[rand() % 6], (rand() % 40 + 4));
 			}
 			else if (!isGaming)
 			{
 				participants[i] = new NonGamingStudent(FirstName[rand() % 9] + " " + LastName[rand() % 9],
-					rand() % 36 + 16, cName[rand() % 4], pName[rand() % 4],
-					rand() % 8 + 1, gName[rand() % 5], (rand() % 40 + 4));
+					rand() % 21 + 16, cName[rand() % 4], pName[rand() % 4],
+					rand() % 9 + 1, gName[rand() % 5], (rand() % 40 + 4));
 			}
 		}
 		for(int i = 0; i < NUM_PARTICIPANTS; i++)
 		{
-			cout << participants[i]->GetName();
-			cout << participants[i]->GetAge();
+			cout << participants[i]->GetName() << endl;
+			cout << participants[i]->GetAge() << endl;
+			if(participants[i]->IsGaming())
+			{
+				cout << dynamic_cast<GamingStudent*>(participants[i])->GetHours()<< endl;
+				cout << dynamic_cast<GamingStudent*>(participants[i])->GetGamingDevice() << endl;
+			}
+			else if(!participants[i]->IsGaming())
+			{
+				cout << dynamic_cast<NonGamingStudent*>(participants[i])->GetHours()<< endl;
+				cout << dynamic_cast<NonGamingStudent*>(participants[i])->GetStreamingSerivce() << endl;
+			}
+			
 		}
 	}
 
