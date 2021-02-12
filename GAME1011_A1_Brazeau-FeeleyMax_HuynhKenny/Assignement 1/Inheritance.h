@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <iostream>
+#include <ctime>
 using namespace std;
 
 //Person class characteristics
@@ -16,6 +18,13 @@ enum StreamingService { NETFLIX, HULU, CRAVE, DISNEY_PLUS, HBO, AMAZON_PRIME_VID
 //gaming student characteristics 
 enum GamingDevice {PS4, PS5, XBOX_ONE, XBOX_SERIES_X, NINTENDO_SWITCH, WII, PC };
 
+const string FirstName[] = { "Verdell", "Sook", "Xavier", "Lise", "Hanna", "Lester", "Amal", "Candance", "Edith", "Lauren" };
+const string LastName[] = { "Lasley", "Nix", "Armstrong", "Morency", "Amico", "Bankston", "Hawbaker", "Wickham", "Eisenmann", "Winzer" };
+const string sName[] = { "Netflix", "Hulu", "Crave", "Disney+" , "HBO", "Amazon Prime Video" };
+const string gName[] = { "PS4", "PS5", "Xbox One", "Xbox Series X", "Nintendo Switch", "Wii", "PC" };
+const string cName[] = { "George Brown", "Seneca", "Centennial", "Humber", "Sheridan" };
+const string pName[] = { "Computer Science", "Biology", "Art", "Business", "Hospitality" };
+
 
 
 class Person
@@ -24,7 +33,7 @@ private:
 	string m_name;
 	int m_age{};
 public:
-	virtual int Age() const = 0;
+	virtual bool IsGaming() const = 0;
 	Person()
 	{
 		SetName("");
@@ -59,42 +68,58 @@ private:
 	string m_nameOfProgram;
 	int m_semester{};
 public:
-	Student(string name, string college, string program, int semester)
+	Student()
 	{
-		SetName(name);
+		SetName("");
+		SetAge(0);
+		SetCollege("");
+		SetProgram("");
+		SetSemester(0);
+	}
+	Student(string name, int age, string college, string program, int semester) : Person(name, age)
+	{
 		SetCollege((college));
 		SetProgram((program));
 		SetSemester(semester);
 	}
+	virtual bool IsGaming() const
+	{
+		return false;
+	}
 	void SetCollege(string college)
 	{
-		m_nameOfCollege = college;
+		this->m_nameOfCollege = college;
 	}
 	void SetProgram(string program)
 	{
-		m_nameOfProgram = program;
+		this->m_nameOfProgram = program;
 	}
 	void SetSemester(int semester)
 	{
-		m_semester = semester;
+		this->m_semester = semester;
 	}
 };
 
 class GamingStudent : public Student
 {
 private:
-	GamingDevice m_console;
-	double m_hours;
+	string m_console;
+	double m_hours{};
 public:
-	virtual int Age() const
+	GamingStudent(string name, int age, string college, string program, int semester, string console, double hours) : Student(name, age, college, program, semester)
 	{
-		return GetAge();
+		SetGamingDevice(console);
+		SetHours(hours);
 	}
-	void SetGamingDevice(GamingDevice console)
+	virtual bool IsGaming() const
 	{
-		m_console = console;
+		return true;
 	}
-	GamingDevice GetGaming()
+	void SetGamingDevice(string console)
+	{
+		this->m_console = console;
+	}
+	string GetGamingDevice()
 	{
 		return m_console;
 	}
@@ -111,27 +136,29 @@ public:
 class NonGamingStudent : public Student
 {
 private:
-	StreamingService m_service;
+	string m_service;
 	double m_hours;
 public:
-
-	virtual int Age() const
+	NonGamingStudent(string name, int age, string college, string program, int semester, string service, double hours) : Student(name, age, college, program, semester)
 	{
-		return GetAge();
+		SetStreamingService(service);
+		SetHours(hours);
 	}
-	
-	
-	void SetStreamingService(StreamingService console)
+	virtual bool IsGaming() const
 	{
-		m_service = console;
+		return false;
 	}
-	StreamingService GetGaming()
+	void SetStreamingService(string service)
+	{
+		this->m_service = service;
+	}
+	string GetStreamingSerivce()
 	{
 		return m_service;
 	}
 	void SetHours(double hours)
 	{
-		m_hours = hours;
+		this->m_hours = hours;
 	}
 	double GetHours()
 	{
@@ -139,15 +166,63 @@ public:
 	}
 };
 
-class Survey : Person
+class Survey
 {
 private:
-	
+	int NumberOfGamingStudents = 0;
+	int NumberOfNonGamingStudents = 0;
+	Person** participants;
+	int NUM_PARTICIPANTS;
+	bool isGaming;
 public:
-	void Process(Person* arr[])
+	void SetNumParticipants(int num)
 	{
-		
+		NUM_PARTICIPANTS = num;
 	}
+	void Randomize()
+	{
+		srand(time(0));
+		for(int i = 0; i< NUM_PARTICIPANTS;i++)
+		{
+			isGaming = rand() % 2;
+			if (isGaming)
+			{
+				participants[i] = new GamingStudent(FirstName[rand() % 9] + " " + LastName[rand() % 9],
+					rand() % 36 + 16, cName[rand() % 4], pName[rand() % 4],
+					rand() % 8 + 1, gName[rand() % 6], (rand() % 40 + 4));
+			}
+			else if (!isGaming)
+			{
+				participants[i] = new NonGamingStudent(FirstName[rand() % 9] + " " + LastName[rand() % 9],
+					rand() % 36 + 16, cName[rand() % 4], pName[rand() % 4],
+					rand() % 8 + 1, gName[rand() % 5], (rand() % 40 + 4));
+			}
+		}
+		for(int i = 0; i < NUM_PARTICIPANTS; i++)
+		{
+			cout << participants[i]->GetName();
+			cout << participants[i]->GetAge();
+		}
+	}
+
+	
+	//void Process(Survey* participant[], int arraysize)
+	//{
+	//	for(int i = 0; i < arraysize; i++)
+	//	{
+	//		if(participant[i]->participants->IsGaming())
+	//		{
+	//			NumberOfGamingStudents++;
+	//		}
+	//		else if(!participant[i]->participants->IsGaming())
+	//		{
+	//			NumberOfNonGamingStudents++;
+	//		}
+	//	}
+
+	//	cout << NumberOfGamingStudents << endl;
+	//	cout << NumberOfNonGamingStudents << endl;
+	//}
 	
 };
 
